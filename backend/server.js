@@ -7,10 +7,11 @@ import messageRoutes from "./routes/message.routes.js";
 import userRoutes from "./routes/user.routes.js";
 
 import connectToMongoDB from "./db/connectToMongoDb.js";
+import { app, server } from "./socket/socket.js";
 // const express = require('express'); - to avoid importing in this manner we added "type":"module" in package.json file
 // const dotenv = require('dotenv');
 
-const app = express();
+
 const PORT = process.env.PORT || 5000;
 
 dotenv.config();
@@ -27,7 +28,7 @@ app.get("/", (req, res) => {
   res.send("Server running!!");
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   connectToMongoDB();
   console.log(`Server running on port ${PORT}.`);
 });
